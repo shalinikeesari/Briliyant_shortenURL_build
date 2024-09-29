@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+URL Shortener Service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a URL Shortener service built with React.js for the frontend and Node.js, Express.js, and MongoDB for the backend. The service allows users to input a long URL, get a shortened version, and redirects the user to the original URL when the short URL is visited.
 
-## Available Scripts
+Features
 
-In the project directory, you can run:
+Shorten URLs: Input long URLs and get shortened, unique URLs.
 
-### `npm start`
+Redirect to Original URL: Short URLs will redirect to the corresponding long URL.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+MongoDB Integration: Stores original URLs, short URLs, and unique short codes in the database.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Frontend: React.js
 
-### `npm run build`
+Backend: Node.js, Express.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Database: MongoDB (using Mongoose)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Unique Code Generation: nanoid (for generating short URL codes)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Installation and Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Prerequisites
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Make sure you have the following installed on your machine:
 
-## Learn More
+Node.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+MongoDB Atlas account or local MongoDB setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Git (to clone the repository)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Backend Setup
 
-### Analyzing the Bundle Size
+1. Clone the repository:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+git clone <your-repo-url>
+cd url-shortener
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Install backend dependencies:
 
-### Advanced Configuration
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+3. Set up environment variables:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Create a .env file in the root directory and add the following:
 
-### `npm run build` fails to minify
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<databaseName>?retryWrites=true&w=majority
+PORT=5000
+BASE_URL=http://localhost:5000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Replace <username>, <password>, and <databaseName> with your MongoDB Atlas credentials.
+
+
+
+4. Run the backend:
+
+node index.js
+
+The backend will now run on http://localhost:5000.
+
+
+
+Frontend Setup
+
+1. Navigate to the frontend folder:
+
+cd frontend
+
+
+2. Install frontend dependencies:
+
+npm install
+
+
+3. Start the frontend:
+
+npm start
+
+The frontend will run on http://localhost:3000.
+
+
+
+
+---
+
+API Endpoints
+
+1. POST /api/url/shorten
+
+This endpoint is used to shorten a long URL.
+
+Request Body:
+
+{
+    "longUrl": "https://www.example.com"
+}
+
+Response:
+
+{
+    "shortUrl": "http://localhost:5000/abc123"
+}
+
+
+2. GET /:code
+
+This endpoint is used to redirect the short URL to the original long URL.
+
+Example:
+
+Visiting http://localhost:5000/abc123 will redirect you to https://www.example.com.
+
+
